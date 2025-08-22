@@ -24,7 +24,7 @@ return new class extends Migration
             // Foreign key constraint
             $table->foreign('category_id')
                 ->references('id')
-                ->on('category')
+                ->on('company_category')
                 ->nullOnDelete(); // sets category_id = null if referenced row deleted
         });
     }
