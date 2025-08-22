@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('category', function (Blueprint $table) {
+        Schema::create('company_category', function (Blueprint $table) {
             $table->id();
             $table->string('title', 225);
             $table->timestamp('created_at')->useCurrent();

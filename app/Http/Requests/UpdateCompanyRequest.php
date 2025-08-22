@@ -24,7 +24,7 @@ class UpdateCompanyRequest extends FormRequest
        return [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category_id' => 'nullable|exists:category,id',
+            'category_id' => 'nullable|exists:company_category,id',
            'status' => 'required|in:0,1',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048', // max 2MB
         ];

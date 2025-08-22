@@ -5,7 +5,7 @@ use Eloquent as Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Category extends Model {
     use HasFactory;
-    public $table = 'category';
+    public $table = 'company_category';
 
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';

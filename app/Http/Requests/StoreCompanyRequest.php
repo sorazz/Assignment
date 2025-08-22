@@ -25,7 +25,7 @@ class StoreCompanyRequest extends FormRequest
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
            'status' => 'required|in:0,1',
-            'category_id' => 'nullable|exists:category,id',
+            'category_id' => 'nullable|exists:company_category,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
