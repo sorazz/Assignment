@@ -5,6 +5,5 @@ use App\Http\Controllers\API\CategoryController;
 
 
 
-  Route::apiResource('company', CompanyController::class);
-   Route::apiResource('category', CategoryController::class);
-
+Route::apiResource('company', CompanyController::class);
+Route::apiResource('category', CategoryController::class);

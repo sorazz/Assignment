@@ -12,18 +12,20 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('company', function (Blueprint $table) {
-            $table->unsignedBigInteger('category_id')->nullable(); // category_id INT(11) NULL
-            $table->string('title', 255); // NOT NULL
+            $table->id();
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->string('title', 255);
             $table->string('image', 255)->nullable();
             $table->text('description')->nullable();
-            $table->boolean('status'); // NOT NULL
-            $table->timestamps(); // created_at, updated_at -> NOT NULL
+             $table->boolean('status')->default(1);
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
 
             // Foreign key constraint
             $table->foreign('category_id')
-                  ->references('id')
-                  ->on('category')
-                  ->nullOnDelete(); // sets category_id = null if referenced row deleted
+                ->references('id')
+                ->on('category')
+                ->nullOnDelete(); // sets category_id = null if referenced row deleted
         });
     }
 

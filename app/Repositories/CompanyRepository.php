@@ -26,6 +26,7 @@ class CompanyRepository implements CompanyRepositoryInterface
 
     public function create(array $data): Company
     {
+
         if (isset($data['image'])) {
             $data['image'] = $data['image']->store('companies', 'public');
         }
@@ -36,7 +37,6 @@ class CompanyRepository implements CompanyRepositoryInterface
     public function update(int $id, array $data): Company
     {
         $company = $this->find($id);
-
         if (isset($data['image'])) {
             if ($company->image) {
                 Storage::disk('public')->delete($company->image);
