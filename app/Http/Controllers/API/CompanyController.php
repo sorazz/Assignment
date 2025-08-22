@@ -20,17 +20,23 @@ class CompanyController extends Controller
 
     public function index(Request $request)
     {
+        try{
         $filters = $request->only('category_id');
         $companies = $this->companyRepo->all($filters, 10);
 
         return response()->json($companies, 200);
+         } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 401);
+        }
     }
 
     public function store(StoreCompanyRequest $request)
     {
         try {
             $company = $this->companyRepo->create($request->all());
-            $company->image = Storage::url($company->image);
+           $company->image = $company->image ? Storage::url($company->image) : '';
             return response()->json([
                 'success' => true,
                 'data' => $company,
@@ -46,29 +52,41 @@ class CompanyController extends Controller
     public function show($id)
     {
         $company = $this->companyRepo->find($id);
-        $company->image = Storage::url($company->image);
+       $company->image = $company->image ? Storage::url($company->image) : '';
 
         return response()->json($company, 200);
     }
 
     public function update($id, Request $request)
     {
+        try {
         $company = $this->companyRepo->update($id, $request->all());
-        $company->image = Storage::url($company->image);
+        $company->image = $company->image ? Storage::url($company->image) : '';
         return response()->json([
             'success' => true,
             'data' => $company,
             'message' => 'Company updated successfully.'
         ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 401);
+        }
     }
 
     public function destroy($id)
     {
+         try {
         $this->companyRepo->delete($id);
 
         return response()->json([
             'success' => true,
             'message' => 'Company deleted successfully.'
         ]);
+         } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ], 401);
+        }
     }
 }
